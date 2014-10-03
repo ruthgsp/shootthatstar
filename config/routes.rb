@@ -1,4 +1,20 @@
 ShootThatStar::Application.routes.draw do
+
+
+
+  namespace :api, defaults: { format: 'json' } do
+    resources :game_sets do
+
+      collection do
+        get :start
+      end
+
+      resources :worlds
+    end
+
+  end
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
