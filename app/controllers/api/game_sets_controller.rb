@@ -1,19 +1,23 @@
 class Api::GameSetsController < ApplicationController
 
 
-  def start
+  def load_game
     @game_set = GameSet.last
-    render json: @game_set
+    render json: { set_id: @game_set.id, state: @game_set.state, winner: @game_set.winner }
   end
 
   def create
-    @game_set = GameSet.create(params[:game_set])
+    @game_set = GameSet.create(
+        p1_udid: params[:uid],
+        state: "waiting"
+    )
+    render json: { set_id: @game_set.id, state: @game_set.state }
   end
 
   def update
     @game_set = GameSet.find(params[:id])
-    @game_set.update_attributes(params[:game_set])
-    render json: @game_set
+    @game_set.update_attributes(p2_udid: params[:udid], state: "active")
+    render json: { set_id: @game_set.id, state: @game_set.state }
   end
 
 end

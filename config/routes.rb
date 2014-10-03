@@ -6,7 +6,7 @@ ShootThatStar::Application.routes.draw do
     resources :game_sets do
 
       collection do
-        get :start
+        get :load_game
       end
 
       resources :worlds
